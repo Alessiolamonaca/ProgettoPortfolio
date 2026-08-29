@@ -1,42 +1,55 @@
 document.addEventListener("DOMContentLoaded", () => {
     renderFilters();
-    renderProject("Tutti");
+    renderProjects("Tutti");
 });
 
-function renderProject(fi,terTag) {
-    const grid = document.getElementById(project-grid);
-    
-    const filtered = filterTag === "Tutti"
-        ?projectsData
-        :projectsData.filter((project) => project.tags.includes(filterTag));
+function renderProjects(filterTag) {
+    const grid = document.getElementById("projects-grid");
 
-    grid.innerHTML = filtered.map((project) =>
-    <div class="project-card">
+    const filtered =
+        filterTag === "Tutti"
+        ? projectsData
+        : projectsData.filter((project) => project.tags.includes(filterTag));
+
+    grid.innerHTML = filtered
+        .map(
+        (project) => `
+        <div class="project-card">
         <h3>${project.title}</h3>
         <p>${project.description}</p>
         <div class="tags">
             ${project.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
         </div>
     </div>
-    ).join("");
+    `,
+    )
+    .join("");
 }
 
-function renderFiltert() {
-    const allTags = ["Tutti, ... new Set(projectsData.flatMap((projects) => project.tags))"];
-    const filtersConteiner = document.getElementById("filters");
+function renderFilters() {
+    const allTags = [
+    "Tutti",
+    ...new Set(projectsData.flatMap((project) => project.tags)),
+];
+    const filtersContainer = document.getElementById("filters");
 
-    filtersConteiner.innerHTML = allTags.map((tag) => 
+    filtersContainer.innerHTML = allTags
+    .map(
+        (tag) => `
     <button class="filter-btn" data-tag="${tag}">${tag}</button>
-    ).join("");
+`,
+    )
+    .join("");
 
-    const button = document.querySelectorAll(".filter-btn");
+    const buttons = document.querySelectorAll(".filter-btn");
 
-    button.forEach((button) => {
-        button.addEventListener("click", () => {
-            button.forEach((b) => b.classList.remove("active"));
-            button.classList.add("active");
-            renderProject(button.dataset.tag);
-        });
+    buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+        renderProjects(button.dataset.tag);
     });
+});
+
     buttons[0].classList.add("active");
 }
