@@ -1,15 +1,42 @@
-document .addEventListener("DOMContentLoaded", () => {
-    const grid = document.getElementById("projects-grid");
+document.addEventListener("DOMContentLoaded", () => {
+    renderFilters();
+    renderProject("Tutti");
+});
 
-    const cardHtml = projectsData.map((project) => 
-        <div class="project-card">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <div class="tags">
-                ${project.tags.map((tag) => '<span class="tag">${tag}</span>').join("")}
-            </div>
+function renderProject(fi,terTag) {
+    const grid = document.getElementById(project-grid);
+    
+    const filtered = filterTag === "Tutti"
+        ?projectsData
+        :projectsData.filter((project) => project.tags.includes(filterTag));
+
+    grid.innerHTML = filtered.map((project) =>
+    <div class="project-card">
+        <h3>${project.title}</h3>
+        <p>${project.description}</p>
+        <div class="tags">
+            ${project.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
         </div>
+    </div>
+    ).join("");
+}
+
+function renderFiltert() {
+    const allTags = ["Tutti, ... new Set(projectsData.flatMap((projects) => project.tags))"];
+    const filtersConteiner = document.getElementById("filters");
+
+    filtersConteiner.innerHTML = allTags.map((tag) => 
+    <button class="filter-btn" data-tag="${tag}">${tag}</button>
     ).join("");
 
-    grid.innerHTML = cardsHtml;
-});
+    const button = document.querySelectorAll(".filter-btn");
+
+    button.forEach((button) => {
+        button.addEventListener("click", () => {
+            button.forEach((b) => b.classList.remove("active"));
+            button.classList.add("active");
+            renderProject(button.dataset.tag);
+        });
+    });
+    buttons[0].classList.add("active");
+}
