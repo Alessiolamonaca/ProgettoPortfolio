@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --color-bg: #f6f7fb;
     --color-surface: #ffffff;
@@ -15,14 +19,14 @@
     padding: 0;
 }
 
-body {
-    font-family: system-ui, sans-serif;
+body body {
+    font-family: "Inter", system-ui, sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
 }
 
-h1 {
-    color: var(--color-accent);
+h1, h2 {
+    font-family: "Poppins", sans-serif;
 }
 
 header {
@@ -78,11 +82,11 @@ nav a:hover::after {
     padding: 0 32px;
 }
 
-#hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 8px;
+#hero h1 #hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 12px;
 }
-
 #hero p {
     font-size: 1.2rem;
     color: var(--color-text-muted);
@@ -192,4 +196,31 @@ footer {
     text-align: center;
     color: var(--color-text-muted);
     border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 700px) {
+nav {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+
+nav ul {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#hero, section {
+    padding: 40px 20px;
+}
+
+#hero {
+    min-height: auto;
+    padding-top: 140px;
+}
+
+#projects-grid {
+    grid-template-columns: 1fr;
+    }
 }
