@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     renderFilters();
     renderProjects("Tutti");
+    renderSkills();
 });
 
 function renderProjects(filterTag) {
@@ -52,4 +53,17 @@ function renderFilters() {
 });
 
     buttons[0].classList.add("active");
+}
+
+function renderSkills() {
+    const container = document.getElementById("skilld-groups");
+    
+    container.innerHTML = skillsData.map((group) =>
+        <div class="skills-group">
+            <h3>${group.category}</h3>
+            <div class="tag">
+                ${group.items.map((item) => <span class="tag">${item}</span>).join("")}
+            </div>
+        </div>
+    ).join("");
 }
